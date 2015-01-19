@@ -1,0 +1,94 @@
+@@ -0,0 +1,94 @@
+--DoT SQL statements initializing DB
+--Doesn't include constraints or ID increments yet
+
+CREATE TABLE Episodes(
+	E_Id		INT	NOT NULL,
+	Boob_Count	INT	NOT NULL,
+	PRIMARY KEY (E_Id)
+);
+
+CREATE TABLE Characters(
+	C_Id		INT		NOT NULL,
+	Name		VARCHAR(40)	NOT NULL,
+	Social_Status	VARCHAR(15),
+	Dies_In	INT,
+	PRIMARY KEY (C_Id),
+	FOREIGN KEY (Dies_In) REFERENCES Episodes(E_Id)
+);
+
+CREATE TABLE Regions(
+	R_Name	VARCHAR(20)	NOT NULL,
+	Capital	VARCHAR(25),	NOT NULL,
+	Climate	VARCHAR(10),
+	PRIMARY KEY (R_Name)
+);
+
+CREATE TABLE Battles(
+	B_Name		VARCHAR(40)	NOT NULL,
+	Winning_House  	VARCHAR(15),
+	H_Name		VARCHAR(15) 	NOT NULL,
+	R_Name  	VARCHAR(20) 	NOT NULL,
+	E_Id		INT		NOT NULL,
+	PRIMARY KEY (B_Name),
+	FOREIGN KEY (R_Name) REFERENCES Regions(R_Name),
+	FOREIGN KEY (E_Id) REFERENCES Episodes(E_Id),
+	FOREIGN KEY (Winning_House) REFERENCES Houses(H_Name)
+);
+
+CREATE TABLE Houses(
+	H_Name	VARCHAR(15)	NOT NULL,
+	Slogan	VARCHAR(30),
+	Symbol	VARCHAR(80)	NOT NULL,
+	PRIMARY KEY (H_Name)
+);
+
+CREATE TABLE CharacterRelationships(
+	PrimanryC_Id	INT		NOT NULL,
+	RelativeC_Id	INT		NOT NULL,
+	Type		VARCHAR(15)	NOT NULL,
+	Start_E		INT		NOT NULL,
+	End_E		INT		NOT NULL,
+	PRIMARY KEY (PrimaryC_Id, RelativeC_Id, Start_E, End_E),
+	FOREIGN KEY (C_Id) REFERENCES Characters(C_Id),
+	FOREIGN KEY (OtherC_Id) REFERENCES Characters(C_Id),
+	FOREIGN KEY (Start_E) REFERENCES Episodes(E_Id),
+	FOREIGN KEY (End_E) REFERENCES Episodes(E_Id)
+);
+
+CREATE TABLE AppearsIn(
+	C_Id	INT		NOT NULL,
+	E_Id	INT,
+	PRIMARY KEY (C_Id, E_Id),
+	FOREIGN KEY (C_Id) REFERENCES Characters(C_Id),
+	FOREIGN KEY (E_Id) REFERENCES Episodes(E_Id)
+);
+
+CREATE TABLE MemberOf(
+	C_Id	INT		NOT NULL,
+	House	VARCHAR(15)	NOT NULL,
+	PRIMARY KEY (C_Id, House),
+	FOREIGN KEY (C_Id) REFERENCES Characters(C_Id),
+	FOREIGN KEY (House) REFERENCES Houses(H_Name)
+);
+
+CREATE TABLE HouseRegion(
+	House	VARCHAR(15)	NOT NULL,
+	Region	VARCHAR(20)	NOT NULL,
+	Status	VARCHAR(15),
+	PRIMARY KEY (House, Region),
+	FOREIGN KEY (House) REFERENCES Houses(H_Name),
+	FOREIGN KEY (Region) REFERENCES Regions(R_Name)
+);
+
+CREATE TABLE HouseInBattles(
+	Battle	VARCHAR(40)	NOT NULL,
+	House	VARCHAR(15)  	NOT NULL,
+	PRIMARY KEY (Battle, House),
+	FOREIGN KEY (Battle) REFERENCES Battles(B_Name),
+	FOREIGN KEY (House) REFERENCES Houses(H_Name)
+);
+
+
+
+
