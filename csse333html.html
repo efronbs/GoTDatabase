@@ -1,0 +1,51 @@
+<!DOCTYPE Html>
+
+<html>
+	<head>
+		<title> DBoT </title>
+		<link type = "text/css" href="style.css" rel="stylesheet"/>
+	</head>
+	
+	<body>
+		<h1 id="heading">
+			Database of Thrones
+		</h1>
+		<h2>
+		<a href="http://www.ilovealpacas.com/"> About the Authors</a>
+		</h2>
+		<div id="inputs">
+			<form id="form1" action ="action.asp">
+				<span> Please select on which category you would like to search:</span>
+				<select id = "entityDropDown" name ="entityDropDown"> 
+					<option class ="dropOption" value ="value"> Character</option>
+					<option class ="dropOption" value ="value"> Episode</option>
+					<option class ="dropOption" value ="value"> Battle</option>
+					<option class ="dropOption" value ="value"> House</option>
+					<option class ="dropOption" value ="value"> Region</option>
+				</select>
+				<span id="nameText"> Please enter a name
+					<input id="name" name="name" type = "text" value=""/>
+				</span>
+				<input id = "submitButton" type="button" onclick="Submit();validate();" value="Submit">
+			</form>
+			<script>
+			function Submit(){
+			document.getElementById("footer").style.color="orange";
+			}
+			</script>
+			<script>
+			function validate(){
+			var selection = document.getElementByName("entityDropDown")[0].value;
+			if(entityDropDown.selectedIndex ==0)
+			document.getElementById("footer").font-size =100px;
+			}
+			</script>
+			
+		</div>
+		<footer>
+			<span id="footer">
+			This project was created for Csse333: Database Systems by Ben Efron, Katie lee, Trent Punt, and Collin Trowbridge
+			</span>
+		</footer>
+	</body>
+</html>

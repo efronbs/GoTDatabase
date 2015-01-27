@@ -1,0 +1,31 @@
+body{
+background-color: gray;
+}
+
+.dropOption{
+font-size:16px;
+}
+#footer{
+font-size:16px;
+position:absolute;
+bottom:0;
+right:10px;
+margin:0 auto;
+height:20px;
+}
+
+#heading{
+color: red;
+font-size:50px;
+text-align: center;
+}
+#inputs{
+border: 2px solid;
+border-radius: 2px;
+}
+#name{
+
+}
+#nameText{
+margin-left:80px;
+}
